@@ -8,9 +8,16 @@ opts = Slop.parse do
   banner 'Usage: add_rubygem_owners [options]'
 
   on 'user=', 'Rubygems user', default: "sul-devops-team"
+  on 'password=', 'Rubygems password'
   on 'noop', 'Enable no-op mode'
   on 'v', 'verbose', 'Verbose mode'
 end
+
+# if a username and password are not provided, this will use the cached credentials in ~/.gem/credentials
+Gems.configure do |config|
+  config.username = opts[:user]
+  config.password = opts[:password]
+end if opts[:user] and opts[:password]
 
 emails = STDIN.readlines.map { |x| x.strip }
 
