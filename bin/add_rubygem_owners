@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
+
+require 'config/boot'
+
+opts = Slop.parse do
+  banner 'Usage: add_rubygem_owners [options]'
+
+  on 'user=', 'Rubygems user', default: "sul-devops-team"
+  on 'noop', 'Enable no-op mode'
+  on 'v', 'verbose', 'Verbose mode'
+end
+
+emails = STDIN.readlines.map { |x| x.strip }
+
+Rubygems.new(opts.to_hash).add_rubygems_owners(emails)

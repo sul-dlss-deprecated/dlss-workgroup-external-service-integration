@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..'))
+
+require 'config/boot'
+
+opts = Slop.parse do
+  banner 'Usage: add_rubygem_owners [options]'
+
+  on 'c=', 'column=', 'Column to return'
+  on 'p=', 'page_id=', 'Confluence page id', default: "467"
+  on 't=', 'title=', "Section title", default: "DLSS Staff"
+  on 'noop', 'Enable no-op mode'
+  on 'v', 'verbose', 'Verbose mode'
+end
+
+
+csv = Roster.new(Roster.client(Roster::Config.config), opts[:page_id], opts.to_hash).to_csv
+
+if opts[:column]
+  if csv.by_col[opts[:column]]
+    puts csv.by_col[opts[:column]].reject(&:nil?).map { |x| x.gsub(/[[:space:]]/, ' ').strip }.reject(&:empty?)
+  else
+    $stderr.puts "No such column: #{opts[:column]}."
+    $stderr.puts "Columns are: #{csv.by_col.keys}"
+    exit 1
+  end
+  
+else
+  puts csv
+end

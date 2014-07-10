@@ -1,0 +1,4 @@
+production:
+  host: <%= ENV['CONFLUENCE_HOST'] %>
+  username: <%= ENV['CONFLUENCE_USER'] %>
+  password: <%= ENV['CONFLUENCE_PASSWORD'] %>
