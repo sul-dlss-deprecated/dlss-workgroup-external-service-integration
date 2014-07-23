@@ -34,7 +34,7 @@ class Rubygems
         Gems.add_owner g['name'], o unless options[:noop]
       end
       
-      logger.warn "Non-developers listed: #{current_owners - owners}"
+      logger.warn "Non-developers listed: #{current_owners - owners - [options[:user]]}"
     end
   end
 end
