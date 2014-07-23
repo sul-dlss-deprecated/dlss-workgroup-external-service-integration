@@ -26,15 +26,26 @@ class Rubygems
   
   def add_rubygems_owners owners
     gems.each do |g|
-      logger.warn "===== #{g['name']} ====="
       current_owners = Gems.owners(g['name']).map { |x| x['email'] }
       
-      (owners - current_owners).each do |o|
-        logger.info "Adding #{o} to #{g['name']}"
+      owners_to_add = owners - current_owners
+      owners_to_remove = current_owners - owners - [options[:user]]
+      
+      if owners_to_add.empty? and owners_to_remove.empty?
+        next
+      end
+      
+      logger.warn "===== #{g['name']} ====="s
+      
+      owners_to_add.each do |o|
+        logger.debug "Adding #{o} to #{g['name']}"
         Gems.add_owner g['name'], o unless options[:noop]
       end
       
-      logger.warn "Non-developers listed: #{current_owners - owners - [options[:user]]}"
+      owners_to_remove.each do |o|
+        logger.warn "$ gem owner #{g['name']} -r #{o}"
+      end
+
     end
   end
 end
