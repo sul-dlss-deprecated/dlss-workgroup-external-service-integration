@@ -35,7 +35,7 @@ class Rubygems
         next
       end
       
-      logger.warn "===== #{g['name']} ====="s
+      logger.warn "===== #{g['name']} ====="
       
       owners_to_add.each do |o|
         logger.debug "Adding #{o} to #{g['name']}"
@@ -45,7 +45,6 @@ class Rubygems
       owners_to_remove.each do |o|
         logger.warn "$ gem owner #{g['name']} -r #{o}"
       end
-
     end
   end
 end
