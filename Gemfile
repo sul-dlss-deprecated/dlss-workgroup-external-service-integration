@@ -7,6 +7,7 @@ gem 'octokit'
 gem 'slop'
 gem 'nokogiri'
 gem 'whenever', require: false
+gem 'rails_config'
 
 group :test do
   gem 'rspec'
