@@ -1,3 +1,3 @@
-server 'sulstats.stanford.edu', user: 'lyberadmin', roles: %{app}
+server 'sul-slack.stanford.edu', user: 'slack', roles: %{app}
 
 Capistrano::OneTimeKey.generate_one_time_key!
