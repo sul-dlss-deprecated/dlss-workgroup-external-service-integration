@@ -1,5 +1,4 @@
-# config valid only for Capistrano 3.4
-lock '3.4.0'
+lock '3.6.0'
 
 set :whenever_roles, :app
 
