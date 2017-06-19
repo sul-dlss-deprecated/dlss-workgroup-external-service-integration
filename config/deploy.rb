@@ -1,12 +1,4 @@
-lock '3.6.0'
-
 set :whenever_roles, :app
-
-set :ssh_options, {
-  keys: [Capistrano::OneTimeKey.temporary_ssh_private_key_path],
-  forward_agent: true,
-  auth_methods: %w(publickey password)
-}
 
 set :application, 'dlss-workgroup-external-service-integration'
 set :repo_url, 'git@github.com:sul-dlss/dlss-workgroup-external-service-integration.git'
