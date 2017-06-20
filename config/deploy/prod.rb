@@ -1,4 +1,4 @@
-server 'sul-slack.stanford.edu', user: 'slack', roles: %{app}
+server 'sul-slack-prod.stanford.edu', user: 'slack', roles: %{app}
 
 Capistrano::OneTimeKey.generate_one_time_key!
 
